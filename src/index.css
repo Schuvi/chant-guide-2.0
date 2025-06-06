@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-lexend: 'Lexend Deca', sans-serif;
+}
 
 :root {
   font-synthesis: none;
@@ -116,9 +121,13 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 font-lexend bg-[#1e2124];
   }
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.input {
+  @apply text-white placeholder:text-white/70 h-10 border-2
 }
