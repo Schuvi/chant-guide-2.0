@@ -8,10 +8,33 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './pages/__root'
 import { Route as IndexImport } from './pages/index'
+import { Route as NewChantComponentsWordByWordSyncImport } from './pages/new-chant/_components/WordByWordSync'
+
+// Create Virtual Routes
+
+const NewChantIndexLazyImport = createFileRoute('/new-chant/')()
+const ChantChantIdLazyImport = createFileRoute('/chant/$chantId')()
+const NewChantComponentsSyncLyricsLazyImport = createFileRoute(
+  '/new-chant/_components/SyncLyrics',
+)()
+const NewChantComponentsLyricsCardLazyImport = createFileRoute(
+  '/new-chant/_components/LyricsCard',
+)()
+const NewChantComponentsLyricContainerLazyImport = createFileRoute(
+  '/new-chant/_components/LyricContainer',
+)()
+const NewChantComponentsInputLyricsLazyImport = createFileRoute(
+  '/new-chant/_components/InputLyrics',
+)()
+const ChantComponentsLyricsLazyImport = createFileRoute(
+  '/chant/_components/Lyrics',
+)()
 
 // Create/Update Routes
 
@@ -20,6 +43,79 @@ const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const NewChantIndexLazyRoute = NewChantIndexLazyImport.update({
+  id: '/new-chant/',
+  path: '/new-chant/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./pages/new-chant/index.lazy').then((d) => d.Route),
+)
+
+const ChantChantIdLazyRoute = ChantChantIdLazyImport.update({
+  id: '/chant/$chantId',
+  path: '/chant/$chantId',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./pages/chant/$chantId.lazy').then((d) => d.Route))
+
+const NewChantComponentsSyncLyricsLazyRoute =
+  NewChantComponentsSyncLyricsLazyImport.update({
+    id: '/new-chant/_components/SyncLyrics',
+    path: '/new-chant/SyncLyrics',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./pages/new-chant/_components/SyncLyrics.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const NewChantComponentsLyricsCardLazyRoute =
+  NewChantComponentsLyricsCardLazyImport.update({
+    id: '/new-chant/_components/LyricsCard',
+    path: '/new-chant/LyricsCard',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./pages/new-chant/_components/LyricsCard.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const NewChantComponentsLyricContainerLazyRoute =
+  NewChantComponentsLyricContainerLazyImport.update({
+    id: '/new-chant/_components/LyricContainer',
+    path: '/new-chant/LyricContainer',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./pages/new-chant/_components/LyricContainer.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const NewChantComponentsInputLyricsLazyRoute =
+  NewChantComponentsInputLyricsLazyImport.update({
+    id: '/new-chant/_components/InputLyrics',
+    path: '/new-chant/InputLyrics',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./pages/new-chant/_components/InputLyrics.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const ChantComponentsLyricsLazyRoute = ChantComponentsLyricsLazyImport.update({
+  id: '/chant/_components/Lyrics',
+  path: '/chant/Lyrics',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./pages/chant/_components/Lyrics.lazy').then((d) => d.Route),
+)
+
+const NewChantComponentsWordByWordSyncRoute =
+  NewChantComponentsWordByWordSyncImport.update({
+    id: '/new-chant/_components/WordByWordSync',
+    path: '/new-chant/WordByWordSync',
+    getParentRoute: () => rootRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -32,6 +128,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/chant/$chantId': {
+      id: '/chant/$chantId'
+      path: '/chant/$chantId'
+      fullPath: '/chant/$chantId'
+      preLoaderRoute: typeof ChantChantIdLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/new-chant/': {
+      id: '/new-chant/'
+      path: '/new-chant'
+      fullPath: '/new-chant'
+      preLoaderRoute: typeof NewChantIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/new-chant/_components/WordByWordSync': {
+      id: '/new-chant/_components/WordByWordSync'
+      path: '/new-chant/WordByWordSync'
+      fullPath: '/new-chant/WordByWordSync'
+      preLoaderRoute: typeof NewChantComponentsWordByWordSyncImport
+      parentRoute: typeof rootRoute
+    }
+    '/chant/_components/Lyrics': {
+      id: '/chant/_components/Lyrics'
+      path: '/chant/Lyrics'
+      fullPath: '/chant/Lyrics'
+      preLoaderRoute: typeof ChantComponentsLyricsLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/new-chant/_components/InputLyrics': {
+      id: '/new-chant/_components/InputLyrics'
+      path: '/new-chant/InputLyrics'
+      fullPath: '/new-chant/InputLyrics'
+      preLoaderRoute: typeof NewChantComponentsInputLyricsLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/new-chant/_components/LyricContainer': {
+      id: '/new-chant/_components/LyricContainer'
+      path: '/new-chant/LyricContainer'
+      fullPath: '/new-chant/LyricContainer'
+      preLoaderRoute: typeof NewChantComponentsLyricContainerLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/new-chant/_components/LyricsCard': {
+      id: '/new-chant/_components/LyricsCard'
+      path: '/new-chant/LyricsCard'
+      fullPath: '/new-chant/LyricsCard'
+      preLoaderRoute: typeof NewChantComponentsLyricsCardLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/new-chant/_components/SyncLyrics': {
+      id: '/new-chant/_components/SyncLyrics'
+      path: '/new-chant/SyncLyrics'
+      fullPath: '/new-chant/SyncLyrics'
+      preLoaderRoute: typeof NewChantComponentsSyncLyricsLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +191,102 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/chant/$chantId': typeof ChantChantIdLazyRoute
+  '/new-chant': typeof NewChantIndexLazyRoute
+  '/new-chant/WordByWordSync': typeof NewChantComponentsWordByWordSyncRoute
+  '/chant/Lyrics': typeof ChantComponentsLyricsLazyRoute
+  '/new-chant/InputLyrics': typeof NewChantComponentsInputLyricsLazyRoute
+  '/new-chant/LyricContainer': typeof NewChantComponentsLyricContainerLazyRoute
+  '/new-chant/LyricsCard': typeof NewChantComponentsLyricsCardLazyRoute
+  '/new-chant/SyncLyrics': typeof NewChantComponentsSyncLyricsLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/chant/$chantId': typeof ChantChantIdLazyRoute
+  '/new-chant': typeof NewChantIndexLazyRoute
+  '/new-chant/WordByWordSync': typeof NewChantComponentsWordByWordSyncRoute
+  '/chant/Lyrics': typeof ChantComponentsLyricsLazyRoute
+  '/new-chant/InputLyrics': typeof NewChantComponentsInputLyricsLazyRoute
+  '/new-chant/LyricContainer': typeof NewChantComponentsLyricContainerLazyRoute
+  '/new-chant/LyricsCard': typeof NewChantComponentsLyricsCardLazyRoute
+  '/new-chant/SyncLyrics': typeof NewChantComponentsSyncLyricsLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/chant/$chantId': typeof ChantChantIdLazyRoute
+  '/new-chant/': typeof NewChantIndexLazyRoute
+  '/new-chant/_components/WordByWordSync': typeof NewChantComponentsWordByWordSyncRoute
+  '/chant/_components/Lyrics': typeof ChantComponentsLyricsLazyRoute
+  '/new-chant/_components/InputLyrics': typeof NewChantComponentsInputLyricsLazyRoute
+  '/new-chant/_components/LyricContainer': typeof NewChantComponentsLyricContainerLazyRoute
+  '/new-chant/_components/LyricsCard': typeof NewChantComponentsLyricsCardLazyRoute
+  '/new-chant/_components/SyncLyrics': typeof NewChantComponentsSyncLyricsLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/chant/$chantId'
+    | '/new-chant'
+    | '/new-chant/WordByWordSync'
+    | '/chant/Lyrics'
+    | '/new-chant/InputLyrics'
+    | '/new-chant/LyricContainer'
+    | '/new-chant/LyricsCard'
+    | '/new-chant/SyncLyrics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/chant/$chantId'
+    | '/new-chant'
+    | '/new-chant/WordByWordSync'
+    | '/chant/Lyrics'
+    | '/new-chant/InputLyrics'
+    | '/new-chant/LyricContainer'
+    | '/new-chant/LyricsCard'
+    | '/new-chant/SyncLyrics'
+  id:
+    | '__root__'
+    | '/'
+    | '/chant/$chantId'
+    | '/new-chant/'
+    | '/new-chant/_components/WordByWordSync'
+    | '/chant/_components/Lyrics'
+    | '/new-chant/_components/InputLyrics'
+    | '/new-chant/_components/LyricContainer'
+    | '/new-chant/_components/LyricsCard'
+    | '/new-chant/_components/SyncLyrics'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ChantChantIdLazyRoute: typeof ChantChantIdLazyRoute
+  NewChantIndexLazyRoute: typeof NewChantIndexLazyRoute
+  NewChantComponentsWordByWordSyncRoute: typeof NewChantComponentsWordByWordSyncRoute
+  ChantComponentsLyricsLazyRoute: typeof ChantComponentsLyricsLazyRoute
+  NewChantComponentsInputLyricsLazyRoute: typeof NewChantComponentsInputLyricsLazyRoute
+  NewChantComponentsLyricContainerLazyRoute: typeof NewChantComponentsLyricContainerLazyRoute
+  NewChantComponentsLyricsCardLazyRoute: typeof NewChantComponentsLyricsCardLazyRoute
+  NewChantComponentsSyncLyricsLazyRoute: typeof NewChantComponentsSyncLyricsLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ChantChantIdLazyRoute: ChantChantIdLazyRoute,
+  NewChantIndexLazyRoute: NewChantIndexLazyRoute,
+  NewChantComponentsWordByWordSyncRoute: NewChantComponentsWordByWordSyncRoute,
+  ChantComponentsLyricsLazyRoute: ChantComponentsLyricsLazyRoute,
+  NewChantComponentsInputLyricsLazyRoute:
+    NewChantComponentsInputLyricsLazyRoute,
+  NewChantComponentsLyricContainerLazyRoute:
+    NewChantComponentsLyricContainerLazyRoute,
+  NewChantComponentsLyricsCardLazyRoute: NewChantComponentsLyricsCardLazyRoute,
+  NewChantComponentsSyncLyricsLazyRoute: NewChantComponentsSyncLyricsLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +299,43 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/chant/$chantId",
+        "/new-chant/",
+        "/new-chant/_components/WordByWordSync",
+        "/chant/_components/Lyrics",
+        "/new-chant/_components/InputLyrics",
+        "/new-chant/_components/LyricContainer",
+        "/new-chant/_components/LyricsCard",
+        "/new-chant/_components/SyncLyrics"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/chant/$chantId": {
+      "filePath": "chant/$chantId.lazy.tsx"
+    },
+    "/new-chant/": {
+      "filePath": "new-chant/index.lazy.tsx"
+    },
+    "/new-chant/_components/WordByWordSync": {
+      "filePath": "new-chant/_components/WordByWordSync.tsx"
+    },
+    "/chant/_components/Lyrics": {
+      "filePath": "chant/_components/Lyrics.lazy.tsx"
+    },
+    "/new-chant/_components/InputLyrics": {
+      "filePath": "new-chant/_components/InputLyrics.lazy.tsx"
+    },
+    "/new-chant/_components/LyricContainer": {
+      "filePath": "new-chant/_components/LyricContainer.lazy.tsx"
+    },
+    "/new-chant/_components/LyricsCard": {
+      "filePath": "new-chant/_components/LyricsCard.lazy.tsx"
+    },
+    "/new-chant/_components/SyncLyrics": {
+      "filePath": "new-chant/_components/SyncLyrics.lazy.tsx"
     }
   }
 }
