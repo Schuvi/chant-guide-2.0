@@ -1,7 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Card, CardContent } from "@/components/atoms/Card";
 import { Badge } from "@/components/atoms/Badge";
-import { DynamicIcon } from "@/components/atoms/DynamicIcon";
 import { Input } from "@/components/atoms/Input";
 import { ChantData } from "@/Constants/ChantData";
 import SpatialAudioIcon from "@mui/icons-material/SpatialAudio";

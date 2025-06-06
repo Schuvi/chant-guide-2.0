@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build-with-ts": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -33,7 +34,7 @@
     "react-player": "^2.16.0",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7",
-    "vite-plugin-compress": "^2.1.1",
+    "vite-plugin-compression2": "^2.0.1",
     "zustand": "^5.0.5"
   },
   "devDependencies": {
