@@ -87,7 +87,7 @@ export default function WordByWordSync() {
   };
 
   return (
-    <div className="h-full relative">
+    <div className="h-full w-full relative">
       <div
         id="sync-container"
         className="h-[80%] max-h-[80%] overflow-y-auto md:w-[90%] sm:w-[99%] mx-auto relative select-none"
@@ -127,8 +127,8 @@ export default function WordByWordSync() {
 
       <div
         ref={containerRef}
-        className={`absolute h-12 bg-black rounded-full mx-auto mb-4 transition-all ${
-          controlsState ? "bottom-[130px]" : "bottom-[82px]"
+        className={`fixed h-12 bg-black rounded-full mx-auto mb-4 transition-all ${
+          controlsState ? "bottom-[130px]" : "bottom-2 lg:bottom-[82px]"
         } overflow-hidden z-40`}
         style={{
           left: "50%",

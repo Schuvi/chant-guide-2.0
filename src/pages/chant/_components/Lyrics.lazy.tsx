@@ -34,6 +34,16 @@ export default function LyricsComponent({
   const containerRef = useRef<HTMLDivElement>(null);
   const lyricRefs = useRef<{ [key: number]: HTMLHeadingElement | null }>({});
   const [isEnhanced, setIsEnhanced] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+    };
+    setIsMobile(checkIsMobile());
+  }, []);
 
   const liricleRef = useRef<Liricle | null>(null);
   if (!liricleRef.current) {
@@ -83,21 +93,28 @@ export default function LyricsComponent({
 
     if (!activeElement || !container) return;
 
-    const containerHeight = container.clientHeight;
-    const elementHeight = activeElement.clientHeight;
-    const elementOffsetTop = activeElement.offsetTop;
+    if (isMobile) {
+      activeElement.scrollIntoView({
+        block: "center",
+        behavior: "auto",
+      });
+    } else {
+      const containerHeight = container.clientHeight;
+      const elementHeight = activeElement.clientHeight;
+      const elementOffsetTop = activeElement.offsetTop;
 
-    const scrollTarget =
-      elementOffsetTop - containerHeight / 2 + elementHeight / 2;
+      const scrollTarget =
+        elementOffsetTop - containerHeight / 2 + elementHeight / 2;
 
-    const maxScrollTop = container.scrollHeight - containerHeight;
-    const minScroll = Math.max(0, Math.min(scrollTarget, maxScrollTop));
+      const maxScrollTop = container.scrollHeight - containerHeight;
+      const minScroll = Math.max(0, Math.min(scrollTarget, maxScrollTop));
 
-    container.scrollTo({
-      top: minScroll,
-      behavior: "smooth",
-    });
-  }, [currentLyric, lyricsData]);
+      container.scrollTo({
+        top: minScroll,
+        behavior: "smooth",
+      });
+    }
+  }, [currentLyric, lyricsData, isMobile]);
 
   const handleLyricClick = (lineIndex: number) => {
     if (lyricsData && lyricsData.lines[lineIndex]) {

@@ -70,7 +70,10 @@ export default function SyncLyrics() {
   const totalLyrics = lyrics.length;
 
   return (
-    <div id="sync-container" className="relative h-full w-full flex flex-col justify-between">
+    <div
+      id="sync-container"
+      className="relative h-full w-full flex flex-col justify-between"
+    >
       <div className="max-h-[80%] overflow-y-auto">
         <LyricsCard
           key={0}

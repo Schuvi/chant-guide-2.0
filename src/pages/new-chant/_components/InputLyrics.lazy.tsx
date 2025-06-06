@@ -15,14 +15,14 @@ export default function InputLyrics() {
   };
 
   return (
-    <div className="w-full h-[85%] max-h-[85%] overflow-hidden p-1">
+    <div className="w-full h-1/2 max-h-1/2 lg:h-[85%] lg:max-h-[85%] overflow-hidden p-1">
       <Textarea
         name="lyrics"
         id="lyrics"
         onChange={handleOnChange}
         value={lyrics}
         placeholder="Enter your chants / lyrics here..."
-        className="text-white placeholder:text-white/70 h-full w-full max-h-full overflow-y-auto resize-none"
+        className="text-white placeholder:text-white/70 h-1/2 w-full max-h-1/2 overflow-y-auto resize-none"
       />
     </div>
   );

@@ -10,7 +10,7 @@ function App() {
       <NiceModal.Provider>
         <Router />
       </NiceModal.Provider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

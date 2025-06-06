@@ -11,6 +11,8 @@ import { useLyricsStore } from "@/store/useLyricsStore";
 import { useNavStore } from "@/store/useNavStore";
 import { formatLineByLineLyrics } from "@/utils/formatLineByLineLyrics";
 import { formatWordByWordLyrics } from "@/utils/formatWordByLine";
+import SearchIcon from "@mui/icons-material/Search";
+import RestoreIcon from "@mui/icons-material/Restore";
 
 export const Route = createLazyFileRoute("/new-chant/")({
   component: NewChant,
@@ -64,11 +66,11 @@ function NewChant() {
   };
 
   return (
-    <div className="grid grid-cols-2 h-full max-h-screen gap-5">
+    <div className="grid grid-rows-2 md:grid-cols-2 md:grid-rows-none h-full max-h-screen gap-5">
       <div className="container flex flex-col h-full gap-2">
         <div className="flex gap-2">
           <Input
-            className="input w-72"
+            className="input w-64 lg:w-72"
             placeholder="Enter youtube link video here...."
             startIcon={<MusicVideoIcon sx={{ color: "white" }} />}
             value={audioUrl ?? ""}
@@ -81,7 +83,7 @@ function NewChant() {
               type="button"
               onClick={handleSearch}
             >
-              Search
+              <SearchIcon sx={{ bgcolor: "transparent", color: "black" }} />
             </button>
 
             {currentNav !== null && (
@@ -90,7 +92,7 @@ function NewChant() {
                 className="bg-white text-black p-2 rounded-lg hover:bg-white/55 cursor-pointer transition-all duration-200"
                 onClick={onClickLyricReset}
               >
-                Reset lyrics sync
+                <RestoreIcon sx={{ bgcolor: "transparent", color: "black" }} />
               </button>
             )}
           </div>
@@ -112,6 +114,7 @@ function NewChant() {
             onReady={() => setLoading(false)}
             onProgress={trackProgress}
             width={"100%"}
+            height={"300px"}
           />
         </div>
 

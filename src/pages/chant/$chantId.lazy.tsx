@@ -39,8 +39,8 @@ function ChantPage() {
   const handlePause = () => setIsPlaying(false);
 
   return (
-    <div className="flex h-full max-h-screen gap-10">
-      <div className="flex flex-col">
+    <div className="flex flex-col xl:flex-row h-full max-h-screen gap-10">
+      <div className="flex flex-col gap-3">
         <div className="flex gap-1 items-center">
           <button
             className="cursor-pointer"
@@ -52,7 +52,7 @@ function ChantPage() {
           <h3 className="text-white select-none text-xl">Back</h3>
         </div>
 
-        <div className="flex items-center h-full">
+        <div className="flex items-center justify-center h-full">
           <ReactPlayer
             ref={playerRef}
             url={chantData?.videoUrl}
@@ -69,9 +69,9 @@ function ChantPage() {
                 enablejsapi: 1,
               },
             }}
+            style={{ borderRadius: "8px" }}
           />
         </div>
-
       </div>
 
       <LyricsComponent

@@ -49,7 +49,7 @@ export default function LyricContainer() {
       onValueChange={handleTabsChange}
       value={tabValue}
       defaultValue="lyrics"
-      className="overflow-y-hidden"
+      className="overflow-y-hidden h-full"
     >
       <TabsList>
         <TabsTrigger value="lyrics">Chants</TabsTrigger>
