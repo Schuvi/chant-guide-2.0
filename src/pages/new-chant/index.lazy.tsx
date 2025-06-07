@@ -70,7 +70,7 @@ function NewChant() {
       <div className="container flex flex-col h-full gap-2">
         <div className="flex gap-2">
           <Input
-            className="input w-64 lg:w-72"
+            className="input w-58 lg:w-72"
             placeholder="Enter youtube link video here...."
             startIcon={<MusicVideoIcon sx={{ color: "white" }} />}
             value={audioUrl ?? ""}
@@ -107,15 +107,17 @@ function NewChant() {
         {isLoading && <h1 className="text-white">Loading....</h1>}
 
         <div className="container flex items-center h-full">
-          <ReactPlayer
-            ref={videoRef}
-            url={link ?? ""}
-            controls
-            onReady={() => setLoading(false)}
-            onProgress={trackProgress}
-            width={"100%"}
-            height={"300px"}
-          />
+          <div className="container h-[200px] lg:h-[360px]">
+            <ReactPlayer
+              ref={videoRef}
+              url={link ?? ""}
+              controls
+              onReady={() => setLoading(false)}
+              onProgress={trackProgress}
+              width={"100%"}
+              height={"100%"}
+            />
+          </div>
         </div>
 
         <div className="flex justify-center">

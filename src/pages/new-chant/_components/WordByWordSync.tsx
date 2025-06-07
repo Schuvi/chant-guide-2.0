@@ -127,7 +127,7 @@ export default function WordByWordSync() {
 
       <div
         ref={containerRef}
-        className={`fixed h-12 bg-black rounded-full mx-auto mb-4 transition-all ${
+        className={`fixed lg:absolute h-12 bg-black rounded-full mx-auto mb-4 transition-all ${
           controlsState ? "bottom-[130px]" : "bottom-2 lg:bottom-[82px]"
         } overflow-hidden z-40`}
         style={{
