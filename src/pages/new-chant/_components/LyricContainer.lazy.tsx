@@ -63,7 +63,7 @@ export default function LyricContainer() {
       <TabsContent className="h-screen" value="lyrics">
         <InputLyrics />
       </TabsContent>
-      <TabsContent className="h-screen" value="sync">
+      <TabsContent className="flex-grow overflow-y-auto" value="sync">
         {currentNav === null ? (
           <div className="container w-full h-full flex flex-col items-center justify-center gap-5">
             <button

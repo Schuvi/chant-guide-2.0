@@ -21,6 +21,7 @@ export default function WordByWordSync() {
   const [isDragging, setIsDragging] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (syncedLyrics.length > 0 && currentlyActiveCard < syncedLyrics.length) {
@@ -32,6 +33,37 @@ export default function WordByWordSync() {
       }
     }
   }, [syncedLyrics, currentlyActiveCard]);
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    const activeLineElement = scrollContainer.querySelector(
+      `div.p-4.border.rounded-lg.transition-all.duration-200:nth-child(${currentlyActiveCard + 1})`
+    );
+
+    if (activeLineElement) {
+      const threshold = 6;
+      const totalLines = syncedLyrics.length;
+      const isNearEnd = currentlyActiveCard >= totalLines - threshold;
+
+      if (!isNearEnd) {
+        const containerHeight = scrollContainer.clientHeight;
+        const lineHeight = (activeLineElement as HTMLElement).offsetHeight;
+        const lineOffsetTop = (activeLineElement as HTMLElement).offsetTop;
+
+        const scrollTo = lineOffsetTop - containerHeight / 2 + lineHeight / 2;
+
+        const maxScrollTop = scrollContainer.scrollHeight - containerHeight;
+        const finalScrollTo = Math.max(0, Math.min(scrollTo, maxScrollTop));
+
+        scrollContainer.scrollTo({
+          top: finalScrollTo,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [currentlyActiveCard, syncedLyrics.length]);
 
   const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
@@ -91,6 +123,7 @@ export default function WordByWordSync() {
       <div
         id="sync-container"
         className="h-[80%] max-h-[80%] overflow-y-auto md:w-[90%] sm:w-[99%] mx-auto relative select-none"
+        ref={scrollContainerRef}
       >
         <div className="space-y-4 pb-32">
           {syncedLyrics.map((line, index) => (
@@ -141,21 +174,22 @@ export default function WordByWordSync() {
         onClick={handleSliderDrag}
       >
         <div className="absolute inset-0 flex items-center bg-white">
-          {words.map((_, index) => (
-            <div
-              key={index}
-              className={`h-1 w-1 bg-black rounded-full mx-[calc(100%/${words.length})]`}
-              style={{
-                position: "absolute",
-                left: `${index == words.length - 1 ? (index / words.length) * 100 + 20 : (index / (words.length - 1)) * 100}%`,
-              }}
-            ></div>
-          ))}
+          {words.length > 0 &&
+            words.map((_, index) => (
+              <div
+                key={index}
+                className={`h-1 w-1 bg-black rounded-full mx-[calc(100%/${words.length})]`}
+                style={{
+                  position: "absolute",
+                  left: `${(index / (words.length > 1 ? words.length - 1 : 1)) * 100}%`,
+                }}
+              ></div>
+            ))}
         </div>
         <div
           className="absolute top-0 left-0 h-full bg-black rounded-l-full transition-all"
           style={{
-            width: `${(currentWordIndex / (words.length - 1)) * 100}%`,
+            width: `${(currentWordIndex / (words.length > 1 ? words.length - 1 : 1)) * 100}%`,
           }}
         />
         <div

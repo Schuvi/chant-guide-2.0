@@ -18,9 +18,9 @@ function RootComponent() {
         </Content>
         <BottomNav />
       </div>
-      {/* {import.meta.env.DEV ? (
+      {import.meta.env.DEV ? (
         <TanStackRouterDevtools position="bottom-left" />
-      ) : null} */}
+      ) : null}
     </>
   );
 }
