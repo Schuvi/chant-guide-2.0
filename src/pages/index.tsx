@@ -11,7 +11,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/atoms/Popover";
-import { BottomNav } from "@/components/moleculs/BottomNav";
 
 export const Route = createFileRoute("/")({
   component: IndexComponent,
