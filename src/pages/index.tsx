@@ -54,7 +54,7 @@ function IndexComponent() {
       </h1>
 
       <div className="container flex justify-center">
-        <div className="container grid grid-cols-1 gap-5">
+        <div className="container grid grid-cols-1 lg:grid-cols-3 gap-5">
           {ChantData.map((item) => (
             <div className="flex justify-center">
               <Card
